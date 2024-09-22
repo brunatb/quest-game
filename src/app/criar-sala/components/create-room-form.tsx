@@ -1,17 +1,14 @@
 "use client";
 
-import {
-  Button,
-  ErrorMessage,
-  Input,
-  UserIcon,
-} from "@/app/components";
+import { Button, ErrorMessage, Input, UserIcon } from "@/app/components";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function CreateRoomForm() {
   const [finalScore, setFinalScore] = useState<number>();
   const [nickname, setNickname] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const router = useRouter();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -31,7 +28,8 @@ export function CreateRoomForm() {
       return;
     }
 
-    // Create room logic here
+    const randomIdAlphanumeric = Math.random().toString(36).slice(2)
+    router.push(`/${randomIdAlphanumeric}/sala-de-espera`);
   }
 
   return (
