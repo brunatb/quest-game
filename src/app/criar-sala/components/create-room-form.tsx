@@ -1,6 +1,11 @@
 "use client";
 
-import { Button, ErrorMessage, Input, UserIcon } from "@/app/components";
+import {
+  Button,
+  ErrorMessage,
+  Input,
+  UserIcon,
+} from "@/app/components";
 import { useState } from "react";
 
 export function CreateRoomForm() {
@@ -61,7 +66,7 @@ export function CreateRoomForm() {
             min="1"
           />
         </div>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </div>
       <div className="w-full flex justify-end">
         <div className="w-fit">

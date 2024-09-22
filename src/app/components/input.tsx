@@ -4,7 +4,7 @@ export function Input({ icon, label, ...props }: Props) {
   return (
     <>
       {label && (
-        <label className="text-foreground mb-2 inline-block">
+        <label className="text-foreground mb-2 inline-block font-semibold">
           {label}
         </label>
       )}

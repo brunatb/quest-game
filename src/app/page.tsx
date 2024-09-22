@@ -7,7 +7,7 @@ export default function Home() {
         Quest
       </h1>
       <p className="text-lg">Comece um novo jogo ou entre em uma sala!</p>
-      <div className="w-full space-y-2">
+      <div className="w-full space-y-4">
         <Link variant="light" href="/criar-sala">
           Novo jogo
         </Link>
