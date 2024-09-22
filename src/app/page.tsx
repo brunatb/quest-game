@@ -1,4 +1,4 @@
-import { DarkLink, LightLink } from "./components";
+import { Link } from "./components";
 
 export default function Home() {
   return (
@@ -8,8 +8,10 @@ export default function Home() {
       </h1>
       <p className="text-lg">Comece um novo jogo ou entre em uma sala!</p>
       <div className="w-full space-y-2">
-        <LightLink href="/criar-sala">Novo jogo</LightLink>
-        <DarkLink href="/entrar-na-sala">Entrar em uma sala</DarkLink>
+        <Link variant="light" href="/criar-sala">
+          Novo jogo
+        </Link>
+        <Link href="/entrar-na-sala">Entrar em uma sala</Link>
       </div>
     </main>
   );
