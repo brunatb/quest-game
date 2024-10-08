@@ -24,6 +24,8 @@ export function EnterRoomForm() {
     // Create room logic here
   }
 
+
+
   return (
     <form
       className="w-full space-y-6 border border-foreground p-8 rounded-lg"
