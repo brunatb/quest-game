@@ -13,7 +13,9 @@ export default function Page() {
         height={400}
         alt="Picture of the author"
       />
-      <GoBackButton href="/">Voltar</GoBackButton>
+      <div className="w-full text-left">
+        <GoBackButton href="/">Voltar</GoBackButton>
+      </div>
       <CreateRoomForm />
     </div>
   );

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function CreateRoomForm() {
-  const [finalScore, setFinalScore] = useState<number>();
   const [nickname, setNickname] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
   const router = useRouter();
@@ -15,16 +14,6 @@ export function CreateRoomForm() {
 
     if (!nickname) {
       setErrorMessage("O campo apelido é obrigatório");
-      return;
-    }
-
-    if (!finalScore) {
-      setErrorMessage("O campo pontuação final é obrigatório");
-      return;
-    }
-
-    if (finalScore < 1) {
-      setErrorMessage("A pontuação final deve ser maior que 0");
       return;
     }
 
@@ -54,19 +43,20 @@ export function CreateRoomForm() {
             placeholder="joao_silva"
           />
         </div>
-        <div className="w-full">
-          <Input
-            label="Pontuação final"
-            value={finalScore}
-            onChange={(event) => setFinalScore(Number(event.target.value))}
-            placeholder="100"
-            type="number"
-            min="1"
-          />
+        <h2 className="w-full mb-2 text-lg text-gray-900 dark:text-white">
+          Regras do Jogo
+        </h2>
+          <div className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+            <ul>
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">15s</li>  
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">6 Perguntas</li>  
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">Apostas de 100 à 1</li>  
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">Maior Pontuação Vence</li>  
+            </ul> 
         </div>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </div>
-      <div className="w-full flex justify-end">
+      <div className="w-full flex justify-center">
         <div className="w-fit">
           <Button variant="light" type="submit">
             Criar sala

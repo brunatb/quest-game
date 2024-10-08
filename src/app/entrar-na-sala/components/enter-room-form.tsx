@@ -57,9 +57,12 @@ export function EnterRoomForm() {
         </div>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </div>
-      <div className="w-full flex justify-end">
-        <div className="w-fit">
-          <Button variant="light" type="submit">
+      <div className="w-full flex justify-center">
+        <div className="flex w-fit gap-x-4">
+          <Button variant="dark" type="submit">
+            Login
+          </Button>
+          <Button variant="white" type="submit">
             Entrar na sala
           </Button>
         </div>
