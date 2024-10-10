@@ -1,20 +1,15 @@
 "use client";
 
-import { Button, ErrorMessage, Input, UserIcon } from "@/app/components";
+import { Button, ErrorMessage, Input, useAuth } from "@/app/components";
 import { useState } from "react";
 
 export function EnterRoomForm() {
-  const [nickname, setNickname] = useState<string>();
   const [roomCode, setRoomCode] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const { user } = useAuth();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
-    if (!nickname) {
-      setErrorMessage("O campo apelido é obrigatório");
-      return;
-    }
 
     if (!roomCode) {
       setErrorMessage("O campo código da sala é obrigatório");
@@ -33,17 +28,14 @@ export function EnterRoomForm() {
         Entrar em uma sala
       </h1>
       <p className="text-lg text-center">
-        Já tem um código de sala? <br></br>Insira o código da sala abaixo para entrar!
+        Já tem um código de sala? <br></br>Insira o código da sala abaixo para
+        entrar!
       </p>
       <div className="w-full space-y-4">
         <div className="w-full">
-          <Input
-            icon={<UserIcon />}
-            label="Apelido"
-            value={nickname}
-            onChange={(event) => setNickname(event.target.value)}
-            placeholder="joao_silva"
-          />
+          <label className="text-foreground mb-2 inline-block font-semibold">
+            Usuário: {user?.username}
+          </label>
         </div>
         <div className="w-full">
           <Input

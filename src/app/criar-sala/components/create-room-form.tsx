@@ -1,22 +1,17 @@
 "use client";
 
-import { Button, ErrorMessage, Input, UserIcon } from "@/app/components";
+import { Button, ErrorMessage, Input, useAuth } from "@/app/components";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function CreateRoomForm() {
   const [finalScore, setFinalScore] = useState<number>();
-  const [nickname, setNickname] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
   const router = useRouter();
+  const { user } = useAuth();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
-    if (!nickname) {
-      setErrorMessage("O campo apelido é obrigatório");
-      return;
-    }
 
     if (!finalScore) {
       setErrorMessage("O campo pontuação final é obrigatório");
@@ -28,7 +23,7 @@ export function CreateRoomForm() {
       return;
     }
 
-    const randomIdAlphanumeric = Math.random().toString(36).slice(2)
+    const randomIdAlphanumeric = Math.random().toString(36).slice(2);
     router.push(`/${randomIdAlphanumeric}/sala-de-espera`);
   }
 
@@ -46,13 +41,9 @@ export function CreateRoomForm() {
       </p>
       <div className="w-full space-y-4">
         <div className="w-full">
-          <Input
-            icon={<UserIcon />}
-            label="Apelido"
-            value={nickname}
-            onChange={(event) => setNickname(event.target.value)}
-            placeholder="joao_silva"
-          />
+          <label className="text-foreground mb-2 inline-block font-semibold">
+            Usuário: {user?.username}
+          </label>
         </div>
         <div className="w-full">
           <Input
