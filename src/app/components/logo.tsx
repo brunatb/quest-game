@@ -6,7 +6,7 @@ export function LogoQueston(){
         src="/images/Logo4.png"
         width={400}
         height={400}
-        alt="Picture of the author"
+        alt="Logotipo Principal do Aplicativo"
       />
     )
 }

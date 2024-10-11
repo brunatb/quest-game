@@ -62,7 +62,7 @@ export function EnterRoomForm() {
           <Button variant="dark" type="submit">
             Login
           </Button>
-          <Button variant="white" type="submit">
+          <Button variant="light" type="submit">
             Entrar na sala
           </Button>
         </div>
