@@ -5,7 +5,7 @@ export function ScreenQuestion() {
     const testeAlternativa = ["A) Resposta da pergunta" , "B) resp" , "C) resp" , "D) resp"]; 
   
   //Simulando uma consulta por categoria da pergunta
-    const categoria = "Artes"; 
+    const categoria = "Sociedade"; 
    
     const CoresCategoria ={
         Artes : '#B91C1C', 
@@ -22,11 +22,12 @@ export function ScreenQuestion() {
 
     return (
 
-      <div className="w-full bg-white space-y-6 border-8 p-8 rounded-xl" style={{borderColor : corPergunta}}>
+      <div className="bg-white space-y-6 max-w-[1200px] border-8 p-4 rounded-3xl" style={{borderColor : corPergunta}}>
             <h1 className= "text-center" style={{color: corPergunta}}>   
                {categoria}
             </h1>
-        <div className="text-justify text-2xl" style={{color : corPergunta}}>
+        <div className="text-justify text-xl" style={{color : corPergunta}}>
+
             
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the standard dummy text ever

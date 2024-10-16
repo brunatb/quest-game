@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.1.0",
     "@nextui-org/avatar": "^2.0.33",
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/system": "^2.2.6",

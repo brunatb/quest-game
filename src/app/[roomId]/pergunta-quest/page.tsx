@@ -8,16 +8,16 @@ import { Timer } from "./components/square-timer";
 export default function Page(){
 
 return (
-  <div className="font-[family-name:var(--font-geist-mono)] w-full text-center text-4xl font-bold">
-    Quest
-    <div className="w-full space-y-6 border border-foreground p-8 rounded-lg">
+  <div className="font-[family-name:var(--font-geist-mono)]  text-center text-4xl font-bold">
+   <h1 className="text-5xl">Quest</h1>
+    <div className="w-full space-y-4 border border-foreground p-2 rounded-xl">
       <ScreenQuestion />
-        <div className="flex flex-row gap-96 justify-center  p-4">
+        <div className="flex flex-row gap-60 justify-center  p-4">
           <div className="flex flex-row gap-2 ">
-          <Avatar></Avatar>
-          <SquarePoint></SquarePoint>
+          <Avatar/>
+          <SquarePoint/>
           </div>
-          <Timer></Timer>
+          <Timer/>
           <div className="flex flex-row gap-2">
           <SquarePoint></SquarePoint>
           <Avatar2></Avatar2>

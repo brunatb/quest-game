@@ -1,6 +1,9 @@
 
 
+
 export function Timer(){
+    //Implementar lógica do timer
+    
     return (
       <div className="text-lg">
         Timer
