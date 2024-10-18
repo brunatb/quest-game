@@ -37,7 +37,7 @@ export function AuthProvider({ children }: Props) {
   }, []);
 
   const shouldShowLoginModal = useMemo(() => {
-    return isLoggedIn === false && path !== "/";
+    return !isLoggedIn && path !== "/";
   }, [isLoggedIn, path]);
 
   return (
