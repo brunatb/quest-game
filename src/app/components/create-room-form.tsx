@@ -1,12 +1,13 @@
 "use client";
 
 import { Button, ErrorMessage, Input, UserIcon } from "@/app/components";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function EnterRoomForm() {
+export function CreateRoomForm() {
   const [nickname, setNickname] = useState<string>();
-  const [roomCode, setRoomCode] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const router = useRouter();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -16,15 +17,9 @@ export function EnterRoomForm() {
       return;
     }
 
-    if (!roomCode) {
-      setErrorMessage("O campo código da sala é obrigatório");
-      return;
-    }
-
-    // Create room logic here
+    const randomIdAlphanumeric = Math.random().toString(36).slice(2)
+    router.push(`/${randomIdAlphanumeric}/sala-de-espera`);
   }
-
-
 
   return (
     <form
@@ -32,10 +27,11 @@ export function EnterRoomForm() {
       onSubmit={handleSubmit}
     >
       <h1 className="font-[family-name:var(--font-geist-mono)] w-full text-center text-2xl font-bold">
-        Entrar em uma sala
+        Crie uma nova sala
       </h1>
       <p className="text-lg text-center">
-        Já tem um código de sala? <br></br>Insira o código da sala abaixo para entrar!
+        Insira os dados para criar uma nova sala e compartilhe com outro
+        jogador!
       </p>
       <div className="w-full space-y-4">
         <div className="w-full">
@@ -47,23 +43,23 @@ export function EnterRoomForm() {
             placeholder="joao_silva"
           />
         </div>
-        <div className="w-full">
-          <Input
-            label="Código da sala"
-            value={roomCode}
-            onChange={(event) => setRoomCode(event.target.value)}
-            placeholder="abc123"
-          />
+        <h2 className="w-full mb-2 text-lg text-gray-900 dark:text-white">
+          Regras do Jogo
+        </h2>
+          <div className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+            <ul>
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">15s</li>  
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">6 Perguntas</li>  
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">Apostas de 100 à 1</li>  
+              <li className="space-y-4 text-white list-disc list-inside dark:text-white">Maior Pontuação Vence</li>  
+            </ul> 
         </div>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </div>
       <div className="w-full flex justify-center">
-        <div className="flex w-fit gap-x-4">
-          <Button variant="dark" type="submit">
-            Login
-          </Button>
+        <div className="w-fit">
           <Button variant="light" type="submit">
-            Entrar na sala
+            Criar sala
           </Button>
         </div>
       </div>

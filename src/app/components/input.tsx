@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from "react";
-
+import "@fontsource/poppins/700.css"; 
 export function Input({ icon, label, ...props }: Props) {
   return (
     <>

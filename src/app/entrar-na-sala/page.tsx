@@ -1,15 +1,21 @@
-import { GoBackButton } from "../components";
+import { LinkButton } from "../components/link-button";
 import { LogoQueston } from "../components/logo";
-import { EnterRoomForm } from "./components";
+import { CreateRoomForm} from "./components/create-room-form-2";
+import "@fontsource/poppins/700.css"; 
+
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center max-w-full lg:w-1/3 space-y-2">
+    <div className="flex flex-col space-y-2 items-center justify-center bg-background-game max-h-screen min-h-screen w-full overflow-auto">
       <LogoQueston />
-       <div className="w-full text-left">
-        <GoBackButton href="/">Voltar</GoBackButton>
+      <div className="p-6 py-6 flex flex-col font-extrabold items-center justify-center w-full  space-y-4">
+        <CreateRoomForm></CreateRoomForm> 
+          <div className="p-4">
+          <LinkButton>ENTRAR NA SALA</LinkButton>
+          </div>
       </div>
-      <EnterRoomForm />
     </div>
   );
 }
+
+//<CreateRoomForm></CreateRoomForm>
