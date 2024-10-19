@@ -60,6 +60,7 @@ export function RegistrationForm({ onToggle }: Props) {
 
     populateUser(loginResponse as User);
     toast.success("Cadastro e login realizados com sucesso!");
+    toast.success("Você ganhou 200 moedas de boas-vindas! 🪙");
     setLoading(false);
   }
 
