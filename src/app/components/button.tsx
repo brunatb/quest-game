@@ -1,14 +1,12 @@
 // receive all props from button element
 
-export function Button({ variant = "dark", children, ...props }: Props) {
-  const classNames =
-    variant === "dark"
-      ? " border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent"
-      : "bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc]";
+export function Button({ children, ...props }: Props) {
   return (
     <button
       {...props}
-      className={`w-full rounded-full border border-solid transition-colors flex items-center justify-center text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44 ${classNames}`}
+      className="bg-background-link rounded-[10px] flex items-center 
+      text-center justify-center 
+      shadow-md border-1.5 w-full text-xl py-3 shadow-gray-950 border-none"
     >
       {children}
     </button>
@@ -17,6 +15,4 @@ export function Button({ variant = "dark", children, ...props }: Props) {
 
 type Props = React.PropsWithChildren<
   React.ButtonHTMLAttributes<HTMLButtonElement>
-> & {
-  variant?: "light" | "dark";
-};
+>;

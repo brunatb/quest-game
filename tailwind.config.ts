@@ -1,4 +1,4 @@
-import {nextui} from '@nextui-org/theme';
+import { nextui } from "@nextui-org/theme";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -11,13 +11,13 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        poppins : ['Poppins' , 'sans-serif'],
+        poppins: ["Poppins", "sans-serif"],
       },
       backgroundImage: {
         "background-game":
-          'linear-gradient(0deg, rgba(91,8,128,1) 15%, rgba(76,152,221,1) 49%, rgba(97,0,255,1) 95%)',
+          "linear-gradient(0deg, rgba(91,8,128,1) 15%, rgba(76,152,221,1) 49%, rgba(97,0,255,1) 95%)",
         "background-link":
-          "linear-gradient(90deg, rgba(199,193,45,1) 6%, rgba(252,69,69,1) 33%)",
+          "linear-gradient(90deg, rgba(199,193,45,1) 20%, rgba(252,69,69,1) 100%)",
       },
       colors: {
         background: "var(--background)",
