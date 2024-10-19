@@ -1,5 +1,6 @@
 import { nextui } from "@nextui-org/theme";
 import type { Config } from "tailwindcss";
+import animation from "tailwindcss-animated";
 
 const config: Config = {
   content: [
@@ -23,8 +24,11 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      height: {
+        'screen-minus-200': 'calc(100vh - 200px)',
+      }
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui(), animation],
 };
 export default config;
