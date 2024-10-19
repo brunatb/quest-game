@@ -7,7 +7,7 @@ import { DrumRoll } from "./drum-roll";
 import { LinkButton } from "@/app/components/link-button";
 
 export function Looser() {
-  const { isLoading, user } = useAuth();
+  const { isLoading } = useAuth();
 
   if (isLoading) {
     return <DrumRoll />;
