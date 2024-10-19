@@ -2,6 +2,8 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "@/shared/protocols";
+import { LoginButton } from "./login-button";
+import { User as UserComponent } from "./user";
 
 export const AuthContext = createContext<AuthContextProps>({
   isLoggedIn: false,
@@ -46,6 +48,9 @@ export function AuthProvider({ children }: Props) {
         isLoading: loading,
       }}
     >
+      {loading && <div className="w-full h-[60px]" />}
+      {!loading && !isLoggedIn && <LoginButton />}
+      {!loading && isLoggedIn && user && <UserComponent user={user} />}
       {children}
     </AuthContext.Provider>
   );
