@@ -1,26 +1,26 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { AuthModal } from "../auth-modal";
+import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "@/shared/protocols";
 
 export const AuthContext = createContext<AuthContextProps>({
   isLoggedIn: false,
   populateUser: () => {},
   user: undefined,
+  isLoading: true,
 });
 
 export type AuthContextProps = {
   isLoggedIn?: boolean;
   populateUser: (user: User) => void;
   user?: User;
+  isLoading: boolean;
 };
 
 export function AuthProvider({ children }: Props) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
-  const path = usePathname();
   const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState(true);
 
   function populateUser(user: User) {
     localStorage.setItem("user", JSON.stringify(user));
@@ -34,11 +34,8 @@ export function AuthProvider({ children }: Props) {
       setUser(JSON.parse(user));
       setIsLoggedIn(true);
     }
+    setLoading(false);
   }, []);
-
-  const shouldShowLoginModal = useMemo(() => {
-    return !isLoggedIn && path !== "/";
-  }, [isLoggedIn, path]);
 
   return (
     <AuthContext.Provider
@@ -46,10 +43,10 @@ export function AuthProvider({ children }: Props) {
         isLoggedIn,
         populateUser,
         user,
+        isLoading: loading,
       }}
     >
       {children}
-      {shouldShowLoginModal === true && <AuthModal />}
     </AuthContext.Provider>
   );
 }
