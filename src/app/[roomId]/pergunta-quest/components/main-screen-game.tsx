@@ -5,7 +5,8 @@ export function ScreenQuestion() {
     const testeAlternativa = ["A) Resposta da pergunta" , "B) resp" , "C) resp" , "D) resp"]; 
   
   //Simulando uma consulta por categoria da pergunta
-    const categoria = "Sociedade"; 
+    const categoria = "Mundo"; 
+    
    
     const CoresCategoria ={
         Artes : '#B91C1C', 
@@ -21,30 +22,38 @@ export function ScreenQuestion() {
     const corPergunta = CoresCategoria[categoria]; 
 
     return (
+      <div
+        className="flex flex-col gap-8 justify-center bg-white border-8 p-2 rounded-3xl"
+        style={{ borderColor: corPergunta }}
+      >
+        <h1 className="text-center text-3xl" style={{ color: corPergunta }}>
+          {categoria}
+        </h1>
 
-      <div className="bg-white space-y-6 max-w-[1200px] border-8 p-4 rounded-3xl" style={{borderColor : corPergunta}}>
-            <h1 className= "text-center" style={{color: corPergunta}}>   
-               {categoria}
-            </h1>
-        <div className="text-justify text-xl" style={{color : corPergunta}}>
-
-            
+        <div className="flex flex-col gap-6 text-justify text-xl" style={{ color: corPergunta }}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the standard dummy text ever
-          since the 1500ss simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the standard dummy text ever
-          since the 1500 simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the standard dummy text ever
-          since the 1500
-              <div className = "flex flex-col gap-4 items-center">
-                <ButtonAlternative borderColor = {corPergunta} textAlternative = {testeAlternativa[0]}></ButtonAlternative>
-                <ButtonAlternative borderColor = {corPergunta} textAlternative = {testeAlternativa[1]}></ButtonAlternative>
-                <ButtonAlternative borderColor = {corPergunta} textAlternative = {testeAlternativa[2]}></ButtonAlternative>
-                <ButtonAlternative borderColor = {corPergunta} textAlternative = {testeAlternativa[3]}></ButtonAlternative>
-           </div> 
+          industry. Lorem Ipsum has been the standard dummy text ever since the
+          1500ss simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the standard dummy text ever 
+          <div className="flex flex-col gap-8 p-2 items-center">
+            <ButtonAlternative
+              borderColor={corPergunta}
+              textAlternative={testeAlternativa[0]}
+            ></ButtonAlternative>
+            <ButtonAlternative
+              borderColor={corPergunta}
+              textAlternative={testeAlternativa[1]}
+            ></ButtonAlternative>
+            <ButtonAlternative
+              borderColor={corPergunta}
+              textAlternative={testeAlternativa[2]}
+            ></ButtonAlternative>
+            <ButtonAlternative
+              borderColor={corPergunta}
+              textAlternative={testeAlternativa[3]}
+            ></ButtonAlternative>
+          </div>
         </div>
-
-
       </div>
     );
 

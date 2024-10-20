@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Avatar(){
     return (
-      <div className="flex flex-col  justify-center items-center gap-4">
+      <div className="flex flex-col justify-center items-center gap-2">
         <Image
             src="/images/Avatar5.png"
             width={60}
