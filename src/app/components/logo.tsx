@@ -4,8 +4,8 @@ export function LogoQueston(){
     return (
     <Image
         src="/images/Logo4.png"
-        width={400}
-        height={400}
+        width={300}
+        height={300}
         alt="Logotipo Principal do Aplicativo"
       />
     )

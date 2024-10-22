@@ -11,7 +11,7 @@ export function User({ user }: Props) {
       </div>
       <div className="flex items-center gap-2">
         <PiCoinsFill className="text-[##6200e1] font-bold" size={20} />
-        <span className="text-[##6200e1] font-bold">0</span>
+        <span className="text-[##6200e1] font-bold">{user.coins}</span>
       </div>
     </div>
   );
