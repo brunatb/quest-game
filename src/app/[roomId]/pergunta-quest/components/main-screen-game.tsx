@@ -5,7 +5,7 @@ export function ScreenQuestion() {
     const testeAlternativa = ["A) Resposta da pergunta" , "B) resp" , "C) resp" , "D) resp"]; 
   
   //Simulando uma consulta por categoria da pergunta
-    const categoria = "Mundo"; 
+    const categoria = "Sociedade"; 
     
    
     const CoresCategoria ={
@@ -23,19 +23,21 @@ export function ScreenQuestion() {
 
     return (
       <div
-        className="flex flex-col gap-8 justify-center bg-white border-8 p-2 rounded-3xl"
+        className="flex flex-col gap-4 justify-center bg-white border-8 rounded-2xl max-h-[490px] p-2  "
         style={{ borderColor: corPergunta }}
       >
-        <h1 className="text-center text-3xl" style={{ color: corPergunta }}>
+        <h1 className="text-center text-xl" style={{ color: corPergunta }}>
           {categoria}
         </h1>
 
-        <div className="flex flex-col gap-6 text-justify text-xl" style={{ color: corPergunta }}>
+        <div
+          className="flex flex-col gap-4 text-justify text-sm p-2"
+          style={{ color: corPergunta }}
+        >
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the standard dummy text ever since the
-          1500ss simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the standard dummy text ever 
-          <div className="flex flex-col gap-8 p-2 items-center">
+          1500ss simply dummy text of the printing.
+          <div className="flex flex-col gap-4 items-center">
             <ButtonAlternative
               borderColor={corPergunta}
               textAlternative={testeAlternativa[0]}

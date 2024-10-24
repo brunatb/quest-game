@@ -8,10 +8,10 @@ import { Timer } from "./components/square-timer";
 export default function Page(){
 
 return (
-  <div className="flex flex-col items-center gap-4 py-4 font-poppins">
+  <div className="flex flex-col p-2 items-center font-poppins">
     <ScreenQuestion />
       <Timer/>
-    <div className="flex flex-row items-center gap-8 justify-center p-3 ">
+    <div className="flex flex-row items-center gap-8 justify-center">
       <Avatar />
       <SquarePoint/>
       <SquarePoint/>

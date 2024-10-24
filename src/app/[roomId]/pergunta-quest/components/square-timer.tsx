@@ -20,7 +20,8 @@ export function Timer(){
     return (
       <div className="text-lg text-center">
         Timer
-        <div className=" flex items-center justify-center h-2 w-16 bg-white space-y-2 border-2 p-4 rounded-xl text-3xl text-black border-black">
+        <div className=" flex items-center justify-center h-2 w-16 bg-white space-y-2 border-2 p-4 rounded-xl text-2xl text-black border-black">
+
           {seconds}s 
         </div>
       </div>

@@ -9,12 +9,18 @@ interface ButtonAlternativeProps{
 
 
 export function ButtonAlternative({ borderColor , textAlternative} : ButtonAlternativeProps){
-    
+   
+
+
+
     return(
         <Button
             style={{
-                maxWidth:'300px',
-                borderColor:`${borderColor}`
+                maxWidth:'250px',
+                textSizeAdjust:"auto",
+                fontSize: '1.2em',
+                borderColor:`${borderColor}`,
+                
             }}
             >
                 {textAlternative}
