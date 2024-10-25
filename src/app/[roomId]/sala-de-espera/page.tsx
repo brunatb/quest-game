@@ -3,7 +3,7 @@ import { WaitingPlayerContainer } from "./components";
 import { CopyRoomCode } from "./components";
 export default function Page({ params }: Props) {
   return (
-    <div className=" flex flex-col p-8">
+    <div className=" flex flex-col p-8 items-center">
      <LogoQueston/>
       <div className="space-y-8 font-poppins w-full text-center text-xl font-bold">
         <WaitingPlayerContainer/>
