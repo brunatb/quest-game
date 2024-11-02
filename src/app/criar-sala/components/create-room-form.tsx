@@ -1,25 +1,30 @@
 "use client";
 
-import {
-  Button,
-  GoBackButton,
-  Input,
-  useAuth,
-} from "@/app/components";
+import { Button, GoBackButton, Input, useAuth } from "@/app/components";
 import { AuthModal } from "@/app/components/auth-modal";
 import { Game } from "@/shared/protocols";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 export function CreateRoomForm() {
+  const [isLoadingRoom, setIsLoadingRoom] = useState(false);
   const router = useRouter();
   const { user, isLoading } = useAuth();
 
   async function handleSubmit(event: React.FormEvent) {
+    setIsLoadingRoom(true);
     event.preventDefault();
 
     if (!user) {
+      setIsLoadingRoom(false);
+      return;
+    }
+
+    if (user.coins < 50) {
+      setIsLoadingRoom(false);
+      toast.error("Você precisa de pelo menos 50 moedas para jogar!");
       return;
     }
 
@@ -35,6 +40,7 @@ export function CreateRoomForm() {
     );
 
     if (!response.ok) {
+      setIsLoadingRoom(false);
       toast.error("Erro ao criar sala");
       return;
     }
@@ -66,7 +72,9 @@ export function CreateRoomForm() {
         </div>
 
         <div className="w-full mt-4">
-          <Button type="submit" disabled={isLoading}>Criar sala</Button>
+          <Button type="submit" disabled={isLoading || isLoadingRoom}>
+            Criar sala
+          </Button>
         </div>
       </form>
       {!isLoading && !user && <AuthModal />}

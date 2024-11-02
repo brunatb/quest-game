@@ -17,17 +17,27 @@ import { toast } from "react-toastify";
 export function EnterRoomForm() {
   const [roomCode, setRoomCode] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [isLoadingRoom, setIsLoadingRoom] = useState(false);
   const router = useRouter();
   const { user, isLoading } = useAuth();
 
   async function handleSubmit(event: React.FormEvent) {
+    setIsLoadingRoom(true);
     event.preventDefault();
 
     if (!user) {
+      setIsLoadingRoom(false);
+      return;
+    }
+
+    if (user.coins < 50) {
+      setIsLoadingRoom(false);
+      toast.error("Você precisa de pelo menos 50 moedas para jogar!");
       return;
     }
 
     if (!roomCode) {
+      setIsLoadingRoom(false);
       setErrorMessage("O campo código da sala é obrigatório");
       return;
     }
@@ -44,7 +54,10 @@ export function EnterRoomForm() {
     );
 
     if (!response.ok) {
-      toast.error("Erro ao entrar na sala. Verifique o código e tente novamente");
+      setIsLoadingRoom(false);
+      toast.error(
+        "Erro ao entrar na sala. Verifique o código e tente novamente"
+      );
       return;
     }
 
@@ -80,7 +93,9 @@ export function EnterRoomForm() {
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </div>
         <div className="w-full mt-4">
-          <Button type="submit" disabled={isLoading}>Entrar na sala</Button>
+          <Button type="submit" disabled={isLoading || isLoadingRoom}>
+            Entrar na sala
+          </Button>
         </div>
       </form>
       {!isLoading && !user && <AuthModal />}
