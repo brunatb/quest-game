@@ -1,16 +1,5 @@
-import { Winner } from "./components/winner";
-import { Looser } from "./components";
+import { DrumRoll } from "./components/drum-roll";
 
-export default function Page({ searchParams }: Props) {
-  if (searchParams?.tipo === "perdedor") {
-    return <Looser />;
-  }
-
-  return <Winner />;
+export default function Page() {
+  return <DrumRoll />;
 }
-
-type Props = {
-  searchParams: {
-    tipo: string;
-  };
-};

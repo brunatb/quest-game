@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`bg-background-game min-h-screen px-6`}>
+      <body className={`bg-background-game min-h-screen px-2`}>
         <AuthProvider>{children}</AuthProvider>
         <ToastContainer />
       </body>

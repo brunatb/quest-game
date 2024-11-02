@@ -12,21 +12,56 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdCodeOff } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export function EnterRoomForm() {
   const [roomCode, setRoomCode] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [isLoadingRoom, setIsLoadingRoom] = useState(false);
   const router = useRouter();
   const { user, isLoading } = useAuth();
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
+    setIsLoadingRoom(true);
     event.preventDefault();
 
+    if (!user) {
+      setIsLoadingRoom(false);
+      return;
+    }
+
+    if (user.coins < 50) {
+      setIsLoadingRoom(false);
+      toast.error("Você precisa de pelo menos 50 moedas para jogar!");
+      return;
+    }
+
     if (!roomCode) {
+      setIsLoadingRoom(false);
       setErrorMessage("O campo código da sala é obrigatório");
       return;
     }
 
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/quest/v1/joinGame`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idUser: user.id, roomCode }),
+      }
+    );
+
+    if (!response.ok) {
+      setIsLoadingRoom(false);
+      toast.error(
+        "Erro ao entrar na sala. Verifique o código e tente novamente"
+      );
+      return;
+    }
+
+    await response.json();
     router.push(`/${roomCode}/sala-de-espera`);
   }
 
@@ -58,7 +93,9 @@ export function EnterRoomForm() {
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </div>
         <div className="w-full mt-4">
-          <Button type="submit">Entrar na sala</Button>
+          <Button type="submit" disabled={isLoading || isLoadingRoom}>
+            Entrar na sala
+          </Button>
         </div>
       </form>
       {!isLoading && !user && <AuthModal />}
