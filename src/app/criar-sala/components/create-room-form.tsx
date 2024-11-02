@@ -2,32 +2,47 @@
 
 import {
   Button,
-  ErrorMessage,
   GoBackButton,
   Input,
   useAuth,
 } from "@/app/components";
 import { AuthModal } from "@/app/components/auth-modal";
+import { Game } from "@/shared/protocols";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export function CreateRoomForm() {
-  const [nickname, setNickname] = useState<string>();
-  const [errorMessage, setErrorMessage] = useState<string>();
   const router = useRouter();
   const { user, isLoading } = useAuth();
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    if (!nickname) {
-      setErrorMessage("O campo apelido é obrigatório");
+    if (!user) {
       return;
     }
 
-    const randomIdAlphanumeric = Math.random().toString(36).slice(2);
-    router.push(`/${randomIdAlphanumeric}/sala-de-espera`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/quest/v1/createGame`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idUser: user.id }),
+      }
+    );
+
+    if (!response.ok) {
+      toast.error("Erro ao criar sala");
+      return;
+    }
+
+    const result = (await response.json()) as Game;
+    const { idFormat } = result;
+
+    router.push(`/${idFormat}/sala-de-espera`);
   }
 
   return (
@@ -46,15 +61,12 @@ export function CreateRoomForm() {
           <Input
             icon={<FaRegUserCircle size={24} className="text-blue-950" />}
             value={isLoading ? "Carregando..." : user?.username}
-            onChange={(event) => setNickname(event.target.value)}
-            placeholder="Username"
             disabled
           />
-          <ErrorMessage>{errorMessage}</ErrorMessage>
         </div>
 
         <div className="w-full mt-4">
-          <Button type="submit">Criar sala</Button>
+          <Button type="submit" disabled={isLoading}>Criar sala</Button>
         </div>
       </form>
       {!isLoading && !user && <AuthModal />}

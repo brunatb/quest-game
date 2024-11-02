@@ -4,3 +4,31 @@ export type User = {
   token: string;
   coins: number;
 };
+
+export type Game = {
+  gameStatus: string;
+  idPlayerOne: string | null;
+  idPlayerTwo: string;
+  pointPlayerOne: number | null;
+  pointPlayerTwo: number | null;
+  questions: Question[];
+  idFormat: string;
+}
+
+export type Question = {
+  id: number;
+  text: string;
+  catText: string;
+  answers: Answer[];
+}
+
+export interface Answer {
+  id: number;
+  text: string;
+  correct: boolean;
+}
+
+export type GameBets = {
+  id: string;
+  bets: Record<number, boolean>;
+}

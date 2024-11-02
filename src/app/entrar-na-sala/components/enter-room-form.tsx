@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdCodeOff } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export function EnterRoomForm() {
   const [roomCode, setRoomCode] = useState<string>();
@@ -19,14 +20,35 @@ export function EnterRoomForm() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+
+    if (!user) {
+      return;
+    }
 
     if (!roomCode) {
       setErrorMessage("O campo código da sala é obrigatório");
       return;
     }
 
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/quest/v1/joinGame`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idUser: user.id, roomCode }),
+      }
+    );
+
+    if (!response.ok) {
+      toast.error("Erro ao entrar na sala. Verifique o código e tente novamente");
+      return;
+    }
+
+    await response.json();
     router.push(`/${roomCode}/sala-de-espera`);
   }
 
@@ -58,7 +80,7 @@ export function EnterRoomForm() {
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </div>
         <div className="w-full mt-4">
-          <Button type="submit">Entrar na sala</Button>
+          <Button type="submit" disabled={isLoading}>Entrar na sala</Button>
         </div>
       </form>
       {!isLoading && !user && <AuthModal />}

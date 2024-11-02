@@ -4,10 +4,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "@/shared/protocols";
 import { LoginButton } from "./login-button";
 import { User as UserComponent } from "./user";
+import { useRouter } from "next/navigation";
 
 export const AuthContext = createContext<AuthContextProps>({
   isLoggedIn: false,
   populateUser: () => {},
+  logout: () => {},
   user: undefined,
   isLoading: true,
 });
@@ -17,17 +19,26 @@ export type AuthContextProps = {
   populateUser: (user: User) => void;
   user?: User;
   isLoading: boolean;
+  logout: () => void;
 };
 
 export function AuthProvider({ children }: Props) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   function populateUser(user: User) {
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
     setIsLoggedIn(true);
+  }
+
+  function logout() {
+    localStorage.removeItem("user");
+    setUser(undefined);
+    setIsLoggedIn(false);
+    router.push("/");
   }
 
   useEffect(() => {
@@ -46,6 +57,7 @@ export function AuthProvider({ children }: Props) {
         populateUser,
         user,
         isLoading: loading,
+        logout,
       }}
     >
       {loading && <div className="w-full h-[60px]" />}
