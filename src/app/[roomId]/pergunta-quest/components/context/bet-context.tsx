@@ -2,6 +2,7 @@
 
 import { GameBets } from "@/shared/protocols";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useGame } from "./game-context";
 
 export const BetContext = createContext<BetContextProps>({
   setBet: () => {},
@@ -19,6 +20,7 @@ export function BetProvider({ children, gameId }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [gameBets, setGameBets] = useState<GameBets>();
   const [currentBet, setCurrentBet] = useState<number>();
+  const { question } = useGame();
 
   function setBet(value: number) {
     if (!gameBets) return;
@@ -28,6 +30,10 @@ export function BetProvider({ children, gameId }: Props) {
 
     const newBets = {
       ...gameBets,
+      questionsBet: {
+        ...gameBets.questionsBet,
+        [question.id]: value,
+      },
       bets: {
         ...gameBets.bets,
         [value]: !gameBets.bets[value],
@@ -51,6 +57,7 @@ export function BetProvider({ children, gameId }: Props) {
   useEffect(() => {
     const initBets = {
       id: gameId,
+      questionsBet: null,
       bets: {
         10: true,
         15: true,
@@ -68,6 +75,7 @@ export function BetProvider({ children, gameId }: Props) {
       } else {
         setGameBets({
           id: gameId,
+          questionsBet: null,
           bets: {
             10: true,
             15: true,
@@ -93,6 +101,12 @@ export function BetProvider({ children, gameId }: Props) {
       localStorage.setItem("bets", JSON.stringify(gameBets));
     }
   }, [gameBets]);
+
+  useEffect(() => {
+    if (question) {
+      setCurrentBet(undefined);
+    }
+  }, [question]);
 
   return (
     <BetContext.Provider value={{ gameBets, setBet, currentBet, isLoading }}>

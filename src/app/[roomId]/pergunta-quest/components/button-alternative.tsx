@@ -1,18 +1,16 @@
 "use client";
 
 import { Answer, Game } from "@/shared/protocols";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useGame } from "./context";
 
 export function ButtonAlternative({
   game,
   answer,
-  questionId,
-  roomId,
   userId,
   bet,
 }: Props) {
-  const router = useRouter();
+  const { nextQuestion } = useGame();
   const [showResult, setShowResult] = useState(false);
 
   async function handleClick() {
@@ -51,7 +49,8 @@ export function ButtonAlternative({
 
       // go to next question after 2 seconds
       setTimeout(() => {
-        router.push(`/${roomId}/${Number(questionId) + 1}/pergunta-quest`);
+        nextQuestion();
+        setShowResult(false);
       }, 2000);
     } catch (error) {
       console.error("Error saving game:", error);

@@ -5,13 +5,14 @@ import { ButtonAlternative } from "./button-alternative";
 import { Game } from "@/shared/protocols";
 import { toast } from "react-toastify";
 import { useAuth } from "@/app/components";
-import { useBet } from "./context";
+import { useBet, useGame } from "./context";
 import { BetComponent } from "./bet-component";
 
 export function ScreenQuestion({ roomId, questionId, game }: Props) {
+  const { question } = useGame();
   const router = useRouter();
   const { user, isLoading } = useAuth();
-  const { isLoading: isLoadingBet, currentBet } = useBet();
+  const { isLoading: isLoadingBet, currentBet, gameBets } = useBet();
 
   if (!isLoading && !user) {
     toast.error("Você precisa estar logado para acessar esta página", {
@@ -25,7 +26,6 @@ export function ScreenQuestion({ roomId, questionId, game }: Props) {
     return <div>Carregando...</div>;
   }
 
-  const question = game.questions[Number(questionId)];
   const categoria = question.catText as keyof typeof CoresCategoria;
 
   const CoresCategoria: {
@@ -47,7 +47,10 @@ export function ScreenQuestion({ roomId, questionId, game }: Props) {
 
   const corPergunta = categoria ? CoresCategoria[categoria] : "#000000";
 
-  if (!isLoadingBet && currentBet === undefined) {
+  if (
+    !isLoadingBet &&
+    (!gameBets?.questionsBet || !gameBets?.questionsBet![question.id])
+  ) {
     return (
       <BetComponent question={question.text} questionColor={corPergunta} />
     );

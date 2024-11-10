@@ -1,10 +1,12 @@
 import { Button, Modal } from "@/app/components";
-import { useBet } from "./context";
+import { useBet, useGame } from "./context";
 import { useState } from "react";
+import { LuAlarmClock } from "react-icons/lu";
 
 export function BetComponent({ question, questionColor }: Props) {
   const { setBet, isLoading, gameBets } = useBet();
   const [selected, setSelected] = useState<number>();
+  const { timer } = useGame();
 
   if (isLoading && !gameBets) {
     return (
@@ -24,9 +26,25 @@ export function BetComponent({ question, questionColor }: Props) {
 
   return (
     <Modal>
-      <div className="font-poppins flex flex-col gap-1 bg-white rounded-lg p-6 w-full">
+      <div className="font-poppins flex flex-col gap-1 bg-white rounded-lg p-6 w-full z-10">
+        <div className="w-full flex justify-end items-center">
+          <LuAlarmClock
+            className={`text-2xl text-blue-950 z-10 ${
+              timer < 10 ? "animate-bounce" : ""
+            }`}
+          />
+          <p
+            className={`text-xl ml-2 ${
+              timer < 10
+                ? timer <= 5
+                  ? "text-red-500"
+                  : "text-yellow-500"
+                : "text-blue-950"
+            }`}
+            >{timer} s</p>
+            
+        </div>
         <p className="text-2xl text-blue-950 ">Aposte suas Moedas!</p>
-
         <p
           className={`text-base font-sans font-normal mt-2`}
           style={{
