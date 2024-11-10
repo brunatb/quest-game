@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import "./globals.css";
 
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider } from "./components";
+
+const AuthProvider = dynamic(
+  () => import("./components/contexts/auth-context")
+);
 
 export const metadata: Metadata = {
   title: "Quest - O seu jogo de perguntas e respostas",

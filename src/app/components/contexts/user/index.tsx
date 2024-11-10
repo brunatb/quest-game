@@ -17,12 +17,11 @@ export function User({ user }: Props) {
         <FaUser className="text-[##6200e1] font-bold" size={20} />
         <span className="text-[##6200e1] font-bold">{user.username}</span>
       </div>
-      <div className="flex items-center gap-2">
-        <PiCoinsFill
-          onClick={() => setOpen(true)}
-          className="text-yellow-500 font-bold"
-          size={20}
-        />
+      <div
+        className="flex items-center gap-2 cursor-pointer"
+        onClick={() => setOpen(true)}
+      >
+        <PiCoinsFill className="text-yellow-500 font-bold" size={20} />
         <span className="text-[##6200e1] font-bold">{user.coins}</span>
       </div>
       <div className="flex items-center gap-2">

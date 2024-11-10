@@ -12,6 +12,7 @@ export const AuthContext = createContext<AuthContextProps>({
   logout: () => {},
   user: undefined,
   isLoading: true,
+  refreshCoins: () => Promise.resolve(),
 });
 
 export type AuthContextProps = {
@@ -20,9 +21,10 @@ export type AuthContextProps = {
   user?: User;
   isLoading: boolean;
   logout: () => void;
+  refreshCoins: () => Promise<void>;
 };
 
-export function AuthProvider({ children }: Props) {
+export default function AuthProvider({ children }: Props) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
@@ -39,6 +41,29 @@ export function AuthProvider({ children }: Props) {
     setUser(undefined);
     setIsLoggedIn(false);
     router.push("/");
+  }
+
+  async function refreshCoins() {
+    if (!user) return;
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wallet/coins?idUser=${user.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) return;
+
+    const data = (await response.json()) as { coins: number };
+
+    if (data.coins !== user.coins) {
+      console.log(data.coins);
+      populateUser({ ...user, coins: data.coins });
+    }
   }
 
   useEffect(() => {
@@ -58,6 +83,7 @@ export function AuthProvider({ children }: Props) {
         user,
         isLoading: loading,
         logout,
+        refreshCoins,
       }}
     >
       {loading && <div className="w-full h-[60px]" />}
