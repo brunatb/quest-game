@@ -59,7 +59,7 @@ export function ButtonAlternative({
 
   return (
     <button
-      className={`w-full border-2 shadow-sm shadow-gray-500 py-3 px-2 rounded-[10px] text-xl ${
+      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg text-xl ${
         showResult
           ? `${answer.correct ? "bg-green-200" : "bg-red-200"}`
           : "bg-white"

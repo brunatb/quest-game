@@ -14,7 +14,7 @@ export function CopyRoomCode({ roomId }: Props) {
       </p>
       <div className="flex items-center w-full justify-center">
         <code className="p-2 rounded-md w-fit justify-center text-white flex">
-          <span className="py-2 px-4 border-white border-t border-b border-l rounded-l-lg">{roomId}</span>
+          <span className="py-2 px-4 border-white border-t border-b border-l rounded-l-lg text-2xl">{roomId}</span>
           <button
             className="text-white px-4 border rounded-r-lg border-white py-2"
             onClick={copyRoomCode}

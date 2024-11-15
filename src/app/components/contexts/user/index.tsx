@@ -12,7 +12,7 @@ export function User({ user }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full flex justify-end items-center gap-4 pt-6">
+    <div className="w-full flex justify-end items-center gap-4 md:pt-6 pt-3 fixed top-0 z-50">
       <div className="flex items-center gap-2">
         <FaUser className="text-[##6200e1] font-bold" size={20} />
         <span className="text-[##6200e1] font-bold">{user.username}</span>

@@ -28,7 +28,7 @@ export function PoolingComponent({ interval, roomId }: PollingComponentProps) {
           if (response.ok) {
             clearInterval(intervalId);
             // Redirecionar para a página de pergunta com o resultado da resposta
-            router.push(`/${roomId}/pergunta-quest`);
+            router.push(`/jogo/${roomId}/pergunta-quest`);
           } else {
             console.error("Erro ao obter status do jogo");
           }

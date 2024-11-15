@@ -3,6 +3,7 @@
 import { Button, ErrorMessage, Input, useAuth } from "@/app/components";
 import { login, registration } from "@/shared/auth";
 import { User } from "@/shared/protocols";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaLock, FaRegUserCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -14,6 +15,7 @@ export function RegistrationForm({ onToggle }: Props) {
   const [loading, setLoading] = useState<boolean>();
   const [error, setError] = useState<string>();
   const { populateUser } = useAuth();
+  const router = useRouter();
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -59,8 +61,15 @@ export function RegistrationForm({ onToggle }: Props) {
     }
 
     populateUser(loginResponse as User);
-    toast.success("Cadastro e login realizados com sucesso!");
-    toast.success("Você ganhou 200 moedas de boas-vindas! 🪙");
+    toast.success("Cadastro e login realizados com sucesso!", {
+      autoClose: 1500,
+      onClose: () => {
+        toast.success("Você ganhou 200 moedas de boas-vindas! 🪙", {
+          autoClose: 1000,
+          onClose: () => router.push("/jogo"),
+        });
+      },
+    });
     setLoading(false);
   }
 

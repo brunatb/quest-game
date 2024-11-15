@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import "./globals.css";
 
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-
-const AuthProvider = dynamic(
-  () => import("./components/contexts/auth-context")
-);
 
 export const metadata: Metadata = {
   title: "Quest - O seu jogo de perguntas e respostas",
@@ -22,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`bg-background-game min-h-screen px-2`}>
-        <AuthProvider>{children}</AuthProvider>
+      <body className={`h-dvh w-full`}>
+        {children}
         <ToastContainer />
       </body>
     </html>

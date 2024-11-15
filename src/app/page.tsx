@@ -1,20 +1,32 @@
-import { LinkButton } from "./components/link-button";
+import dynamic from "next/dynamic";
+import { AuthComponent } from "./auth-component";
 import { LogoQueston } from "./components/logo";
-import "@fontsource/poppins/700.css";
+
+const AuthProvider = dynamic(
+  () => import("./components/contexts/auth-context")
+);
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center">
-      <div className="mt-10">
-        <LogoQueston />
+    <AuthProvider>
+      <div className="md:grid md:grid-cols-5 w-full h-full">
+        <div
+          className="md:block col-span-3 w-full h-full hidden"
+          // background image is on public/images/background.jpg
+          style={{
+            backgroundImage: `url(/images/bg-quest.webp)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            height: "100%",
+          }}
+        ></div>
+        <div className="col-span-2 w-full h-full bg-background-game">
+          <div className="flex flex-col items-center justify-center h-full">
+            <LogoQueston />
+            <AuthComponent />
+          </div>
+        </div>
       </div>
-      <p className="font-poppins font-extrabold text-2xl p-8 text-center mt-2 lg:max-w-md">
-        Comece um novo jogo ou entre em uma sala!
-      </p>
-      <div className="font-poppins flex flex-col items-center w-full lg:max-w-md space-y-4 my-2">
-        <LinkButton href="/criar-sala">CRIAR UMA SALA</LinkButton>
-        <LinkButton href="/entrar-na-sala">ENTRAR EM UMA SALA</LinkButton>
-      </div>
-    </main>
+    </AuthProvider>
   );
 }

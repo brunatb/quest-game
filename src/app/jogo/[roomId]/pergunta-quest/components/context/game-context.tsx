@@ -51,7 +51,7 @@ export default function GameProvider({ children, game }: Props) {
         }
 
         if (findIndex === game.questions.length - 1) {
-          router.push(`/${game.id}/resultado`);
+          router.push(`/jogo/${game.id}/resultado`);
           return;
         }
 
@@ -98,7 +98,7 @@ export default function GameProvider({ children, game }: Props) {
     const findIndex = game.questions.findIndex((q) => q.id === question.id);
 
     if (findIndex === game.questions.length - 1) {
-      router.push(`/${game.id}/resultado`);
+      router.push(`/jogo/${game.id}/resultado`);
       return;
     }
 

@@ -57,7 +57,7 @@ export function ScreenQuestion({ roomId, questionId, game }: Props) {
   }
 
   return (
-    <div className="bg-white space-y-6 px-4 rounded-md py-6">
+    <div className="bg-white w-full space-y-6 px-4 rounded-lg py-6">
       <h2 className="text-center text-2xl mb-2" style={{ color: corPergunta }}>
         {categoria}
       </h2>

@@ -16,7 +16,7 @@ const config: Config = {
       },
       backgroundImage: {
         "background-game":
-          "linear-gradient(0deg, rgba(91,8,128,1) 15%, rgba(76,152,221,1) 49%, rgba(97,0,255,1) 95%)",
+          "linear-gradient(0deg, rgba(91,8,128,1) 20%, rgba(76,152,221,1) 100%, rgba(97,0,255,1) 95%)",
         "background-link":
           "linear-gradient(90deg, rgba(199,193,45,1) 20%, rgba(252,69,69,1) 100%)",
       },
