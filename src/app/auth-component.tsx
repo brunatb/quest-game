@@ -8,7 +8,7 @@ import { useAuth } from "./components";
 export function AuthComponent() {
   const { isLoading, user } = useAuth();
   const [authForm, setAuthForm] = useState<"login" | "register">("login");
-  if (isLoading) return <div>Carregando...</div>;
+  if (isLoading) return <div className="text-white">Carregando...</div>;
   if (!isLoading && user) {
     return;
   }
