@@ -73,6 +73,7 @@ export function BetProvider({ children, gameId }: Props) {
       if (gameId === JSON.parse(bets).id) {
         setGameBets(JSON.parse(bets));
       } else {
+        clearGameBets();
         setGameBets({
           id: gameId,
           questionsBet: null,
@@ -85,7 +86,6 @@ export function BetProvider({ children, gameId }: Props) {
             100: true,
           },
         });
-        clearGameBets();
         updateGameBetsLocalStorage(initBets);
       }
     } else {
