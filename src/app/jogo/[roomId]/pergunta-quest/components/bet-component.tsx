@@ -44,7 +44,7 @@ export function BetComponent({ question, questionColor }: Props) {
             >{timer} s</p>
             
         </div>
-        <p className="text-2xl text-blue-950 ">Aposte suas Moedas!</p>
+        <p className="text-2xl text-blue-950 ">Aposte na sua resposta!</p>
         <p
           className={`text-base font-sans font-normal mt-2`}
           style={{
@@ -55,7 +55,7 @@ export function BetComponent({ question, questionColor }: Props) {
         </p>
 
         <p className="text-lg text-blue-950 my-2">
-          Deseja apostar quantas moedas?
+          Deseja apostar quanto?
         </p>
         <div className="grid grid-cols-3 text-blue-950 gap-4 mt-2 mb-4">
           {gameBets &&

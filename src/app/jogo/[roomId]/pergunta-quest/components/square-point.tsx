@@ -1,14 +1,19 @@
-export function SquarePoint({ points }: Props) {
+"use client";
+
+import { useGame } from "./context";
+
+export function SquarePoint({ player }: Props) {
+  const { points } = useGame();
   return (
-    <div className="text-sm">
+    <div className="text-sm lg:text-base">
       Pontos
-      <div className=" flex items-center justify-center h-8  bg-white space-y-2 border-2 border-gray-500 p-2 rounded-xl text-3xl text-black">
-        {points}
+      <div className=" flex items-center justify-center shadow-md bg-white px-2 mt-1 rounded-xl lg:text-3xl text-xl text-black">
+        {player === 1 ? points.playerOnePoints : points.playerTwoPoints}
       </div>
     </div>
   );
 }
 
 type Props = {
-  points: number;
+  player: 1 | 2;
 };

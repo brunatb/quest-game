@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 export function CreateRoomForm() {
   const [isLoadingRoom, setIsLoadingRoom] = useState(false);
   const router = useRouter();
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, refreshCoins } = useAuth();
 
   async function handleSubmit(event: React.FormEvent) {
     setIsLoadingRoom(true);
@@ -35,7 +35,7 @@ export function CreateRoomForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ idUser: user.id }),
+        body: JSON.stringify({ idUser: user.id, userName: user.username }),
       }
     );
 
@@ -47,7 +47,7 @@ export function CreateRoomForm() {
 
     const result = (await response.json()) as Game;
     const { idFormat } = result;
-
+    await refreshCoins();
     router.push(`/jogo/${idFormat}/sala-de-espera`);
   }
 

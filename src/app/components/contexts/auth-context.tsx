@@ -91,7 +91,6 @@ export default function AuthProvider({ children }: Props) {
 
   useEffect(() => {
     if (!loading && !user) {
-      toast.error("Sessão expirada, faça login novamente");
       logout();
     }
   }, [loading, user]);

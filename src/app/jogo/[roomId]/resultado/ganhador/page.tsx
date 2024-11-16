@@ -1,12 +1,5 @@
 import { Winner } from "../components";
 
-export default function Page({ searchParams }: Props) {
-  console.log(searchParams);
+export default function Page() {
   return <Winner />;
 }
-
-type Props = {
-  searchParams: {
-    roomId: string;
-  };
-};

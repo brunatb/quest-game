@@ -1,12 +1,5 @@
 import { Looser } from "../components";
 
-export default function Page({ searchParams }: Props) {
-  console.log(searchParams);
+export default function Page() {
   return <Looser />;
 }
-
-type Props = {
-  searchParams: {
-    roomId: string;
-  };
-};

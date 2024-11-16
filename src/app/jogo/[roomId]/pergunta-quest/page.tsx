@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { BetProvider } from "./components/context";
 import { LogoQueston } from "@/app/components/logo";
 import GameProvider from "./components/context/game-context";
+import { Bonus } from "./components/bonus";
 
 export default async function Page({ params }: Props) {
   const game = await getGame(params.roomId);
@@ -19,27 +20,30 @@ export default async function Page({ params }: Props) {
             <LogoQueston />
           </div>
           <div className="w-full space-y-4 rounded-xl flex flex-col lg:w-[672px]">
-            <ScreenQuestion
-              roomId={params.roomId}
-              questionId={params.questionId}
-              game={game}
-            />
-            <div className="flex justify-between p-4">
-              <div className="flex flex-row gap-2 ">
+            <div className="px-2">
+              <ScreenQuestion
+                roomId={params.roomId}
+                questionId={params.questionId}
+                game={game}
+              />
+            </div>
+            <Bonus />
+            <div className="flex justify-between px-4">
+              <div className="flex flex-row gap-2">
                 <Avatar
                   imgSrc="/images/peao-azul.png"
                   imgClassName="ring-blue-300"
-                  playerName="Jogador 1"
+                  playerName={game.playerOneUserName || "Jogador 1"}
                 />
-                <SquarePoint points={game.pointPlayerOne || 0} />
+                <SquarePoint player={1} />
               </div>
               <Timer />
               <div className="flex flex-row gap-2">
-                <SquarePoint points={game.pointPlayerTwo || 0} />
+                <SquarePoint player={2} />
                 <Avatar
                   imgSrc="/images/peao-vermelho.png"
                   imgClassName="ring-red-300"
-                  playerName="Jogador 2"
+                  playerName={game.playerTwoUserName || "Jogador 2"}
                 />
               </div>
             </div>

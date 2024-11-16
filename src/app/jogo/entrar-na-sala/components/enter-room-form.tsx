@@ -19,7 +19,7 @@ export function EnterRoomForm() {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [isLoadingRoom, setIsLoadingRoom] = useState(false);
   const router = useRouter();
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, refreshCoins } = useAuth();
 
   async function handleSubmit(event: React.FormEvent) {
     setIsLoadingRoom(true);
@@ -49,7 +49,11 @@ export function EnterRoomForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ idUser: user.id, roomCode }),
+        body: JSON.stringify({
+          idUser: user.id,
+          roomCode,
+          userName: user.username,
+        }),
       }
     );
 
@@ -62,6 +66,7 @@ export function EnterRoomForm() {
     }
 
     await response.json();
+    await refreshCoins();
     router.push(`/jogo/${roomCode}/sala-de-espera`);
   }
 

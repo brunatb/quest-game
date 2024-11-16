@@ -34,8 +34,8 @@ export function Winner() {
           </div>
         </div>
       </div>
-      <div className="mt-10 w-full md:max-w-md">
-        <LinkButton href="/">Voltar para a home</LinkButton>
+      <div className="mt-10 w-full md:max-w-md px-2">
+        <LinkButton href="/jogo">Voltar para a home</LinkButton>
       </div>
     </div>
   );

@@ -3,48 +3,33 @@
 import { Answer, Game } from "@/shared/protocols";
 import { useState } from "react";
 import { useGame } from "./context";
+import { toast } from "react-toastify";
 
-export function ButtonAlternative({
-  game,
-  answer,
-  userId,
-  bet,
-}: Props) {
+export function ButtonAlternative({ game, answer, userId, bet }: Props) {
   const { nextQuestion } = useGame();
   const [showResult, setShowResult] = useState(false);
 
   async function handleClick() {
     setShowResult(true);
-    if (answer.correct) {
-      if (userId === game.idPlayerOne) {
-        if (game.pointPlayerOne === null) {
-          game.pointPlayerOne = bet;
-        }
-
-        game.pointPlayerOne += bet;
-      } else {
-        if (game.pointPlayerTwo === null) {
-          game.pointPlayerTwo = bet;
-        }
-
-        game.pointPlayerTwo += bet;
-      }
+    if (!userId) {
+      toast.error("Você precisa estar logado para responder a pergunta");
     }
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/quest/v1/saveGame`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ gameData: game }),
-        }
-      );
+      if (answer.correct) {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/quest/v1/points/${game.id}/${userId}/${bet}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to save game");
+        if (!response.ok) {
+          throw new Error("Failed to save game");
+        }
       }
 
       // go to next question after 2 seconds
@@ -59,12 +44,13 @@ export function ButtonAlternative({
 
   return (
     <button
-      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg text-xl ${
+      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg lg:text-xl text-base ${
         showResult
           ? `${answer.correct ? "bg-green-200" : "bg-red-200"}`
           : "bg-white"
       }`}
       onClick={handleClick}
+      disabled={showResult}
     >
       {answer.text}
     </button>

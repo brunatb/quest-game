@@ -102,12 +102,6 @@ export function BetProvider({ children, gameId }: Props) {
     }
   }, [gameBets]);
 
-  useEffect(() => {
-    if (question) {
-      setCurrentBet(undefined);
-    }
-  }, [question]);
-
   return (
     <BetContext.Provider value={{ gameBets, setBet, currentBet, isLoading }}>
       {children}

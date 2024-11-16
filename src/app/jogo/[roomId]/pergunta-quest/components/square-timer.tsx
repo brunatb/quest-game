@@ -11,7 +11,7 @@ export function Timer() {
         `text-4xl text-white ${timer < 10 ? "animate-bounce" : ""}`
       } />
       <div
-        className={`flex items-center justify-center h-2 bg-white space-y-2 border-2 p-4 rounded-xl text-3xl border-gray-500 mt-2 ${
+        className={`flex items-center justify-center bg-white space-y-2 px-2 shadow-2xl rounded-xl lg:text-3xl text-xl mt-2 ${
           timer < 10
             ? timer <= 5
               ? "text-red-500"
