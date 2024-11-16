@@ -8,6 +8,7 @@ import {
 } from "@/app/components";
 import { login } from "@/shared/auth";
 import { User } from "@/shared/protocols";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaLock, FaRegUserCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -18,6 +19,7 @@ export function LoginForm({ onToggle }: Props) {
   const [loading, setLoading] = useState<boolean>();
   const [error, setError] = useState<string>();
   const { populateUser } = useAuth();
+  const router = useRouter();
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -48,7 +50,10 @@ export function LoginForm({ onToggle }: Props) {
     }
 
     populateUser(response as User);
-    toast.success("Login realizado com sucesso!");
+    toast.success("Login realizado com sucesso!", {
+      autoClose: 1500,
+      onClose: () => router.push("/jogo"),
+    });
     setLoading(false);
   }
 

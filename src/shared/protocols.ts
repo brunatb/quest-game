@@ -6,6 +6,7 @@ export type User = {
 };
 
 export type Game = {
+  id: number;
   gameStatus: string;
   idPlayerOne: string | null;
   idPlayerTwo: string;
@@ -13,14 +14,17 @@ export type Game = {
   pointPlayerTwo: number | null;
   questions: Question[];
   idFormat: string;
-}
+  userWinner: string | null;
+  playerOneUserName: string;
+  playerTwoUserName: string;
+};
 
 export type Question = {
   id: number;
   text: string;
   catText: string;
   answers: Answer[];
-}
+};
 
 export interface Answer {
   id: number;
@@ -30,5 +34,6 @@ export interface Answer {
 
 export type GameBets = {
   id: string;
+  questionsBet: Record<number, number> | null;
   bets: Record<number, boolean>;
-}
+};

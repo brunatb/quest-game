@@ -4,7 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "@/shared/protocols";
 import { LoginButton } from "./login-button";
 import { User as UserComponent } from "./user";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext<AuthContextProps>({
   isLoggedIn: false,
@@ -12,6 +13,7 @@ export const AuthContext = createContext<AuthContextProps>({
   logout: () => {},
   user: undefined,
   isLoading: true,
+  refreshCoins: () => Promise.resolve(),
 });
 
 export type AuthContextProps = {
@@ -20,13 +22,15 @@ export type AuthContextProps = {
   user?: User;
   isLoading: boolean;
   logout: () => void;
+  refreshCoins: () => Promise<void>;
 };
 
-export function AuthProvider({ children }: Props) {
+export default function AuthProvider({ children }: Props) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const path = usePathname();
 
   function populateUser(user: User) {
     localStorage.setItem("user", JSON.stringify(user));
@@ -41,14 +45,55 @@ export function AuthProvider({ children }: Props) {
     router.push("/");
   }
 
+  async function refreshCoins() {
+    if (!user) return;
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/wallet/coins?idUser=${user.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) return;
+
+    const data = (await response.json()) as { coins: number };
+
+    if (data.coins !== user.coins) {
+      console.log(data.coins);
+      populateUser({ ...user, coins: data.coins });
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
+      if (path === "/") {
+        toast.success(
+          "Você já está logado(a)!Estamos te redirecionando para a tela principal.",
+          {
+            toastId: "already-logged",
+            autoClose: 1000,
+            onClose: () => {
+              router.push("/jogo");
+            },
+          }
+        );
+      }
       setUser(JSON.parse(user));
       setIsLoggedIn(true);
     }
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      logout();
+    }
+  }, [loading, user]);
 
   return (
     <AuthContext.Provider
@@ -58,11 +103,12 @@ export function AuthProvider({ children }: Props) {
         user,
         isLoading: loading,
         logout,
+        refreshCoins,
       }}
     >
-      {loading && <div className="w-full h-[60px]" />}
-      {!loading && !isLoggedIn && <LoginButton />}
-      {!loading && isLoggedIn && user && <UserComponent user={user} />}
+      {loading && path !== '/' && <div className="w-full h-[60px]" />}
+      {!loading && !isLoggedIn && path !== '/' && <LoginButton />}
+      {!loading && isLoggedIn && user && path !== '/' && <UserComponent user={user} />}
       {children}
     </AuthContext.Provider>
   );
