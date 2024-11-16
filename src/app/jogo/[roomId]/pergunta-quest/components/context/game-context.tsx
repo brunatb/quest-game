@@ -238,20 +238,20 @@ export default function GameProvider({ children, game }: Props) {
     getCurrentQuestion();
   }, []);
 
-  //useEffect(() => {
-  //  const interval = setInterval(() => {
-  //    setTimer((prev) => {
-  //      if (prev === 0) {
-  //        nextQuestion();
-  //        return 20;
-  //      }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev === 0) {
+          nextQuestion();
+          return 20;
+        }
 
-  //      return prev - 1;
-  //    });
-  //  }, 1000);
+        return prev - 1;
+      });
+    }, 1000);
 
-  //  return () => clearInterval(interval);
-  //}, [question]);
+    return () => clearInterval(interval);
+  }, [question]);
 
   return (
     <GameContext.Provider

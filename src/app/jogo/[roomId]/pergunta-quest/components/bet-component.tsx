@@ -41,8 +41,9 @@ export function BetComponent({ question, questionColor }: Props) {
                   : "text-yellow-500"
                 : "text-blue-950"
             }`}
-            >{timer} s</p>
-            
+          >
+            {timer} s
+          </p>
         </div>
         <p className="text-2xl text-blue-950 ">Aposte na sua resposta!</p>
         <p
@@ -51,12 +52,10 @@ export function BetComponent({ question, questionColor }: Props) {
             color: questionColor,
           }}
         >
-          Pergunta: {question}
+          <strong>Pergunta:</strong> {question}
         </p>
 
-        <p className="text-lg text-blue-950 my-2">
-          Deseja apostar quanto?
-        </p>
+        <p className="text-lg text-blue-950 my-2">Deseja apostar quanto?</p>
         <div className="grid grid-cols-3 text-blue-950 gap-4 mt-2 mb-4">
           {gameBets &&
             Object.keys(gameBets.bets).map((b, i) => (
