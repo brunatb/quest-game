@@ -4,6 +4,8 @@ import { Answer, Game } from "@/shared/protocols";
 import { useState } from "react";
 import { useGame } from "./context";
 import { toast } from "react-toastify";
+import { FaCheck } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
 export function ButtonAlternative({ game, answer, userId, bet }: Props) {
   const { nextQuestion } = useGame();
@@ -44,15 +46,28 @@ export function ButtonAlternative({ game, answer, userId, bet }: Props) {
 
   return (
     <button
-      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg lg:text-xl text-base ${
+      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg lg:text-xl text-base flex items-center justify-center gap-2 ${
         showResult
-          ? `${answer.correct ? "bg-green-200" : "bg-red-200"}`
+          ? `${
+              answer.correct
+                ? "bg-green-200 text-green-800"
+                : "bg-red-200 text-red-700"
+            }`
           : "bg-white"
       }`}
       onClick={handleClick}
       disabled={showResult}
     >
-      {answer.text}
+      <p>{answer.text}</p>
+      {showResult && (
+        <>
+          {answer.correct ? (
+            <FaCheck className="text-green-800 text-lg" />
+          ) : (
+            <IoMdClose className="text-red-700 text-lg" />
+          )}
+        </>
+      )}
     </button>
   );
 }

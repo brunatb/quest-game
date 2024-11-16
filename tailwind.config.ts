@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss";
 import animation from "tailwindcss-animated";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -25,8 +26,8 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       height: {
-        'screen-minus-200': 'calc(100vh - 200px)',
-      }
+        "screen-minus-200": "calc(100vh - 200px)",
+      },
     },
   },
   plugins: [nextui(), animation],

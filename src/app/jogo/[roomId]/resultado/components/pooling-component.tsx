@@ -12,7 +12,7 @@ type PollingComponentProps = {
 
 export function PoolingComponent({ interval, roomId }: PollingComponentProps) {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, refreshCoins } = useAuth();
 
   useEffect(() => {
     if (!user) return;
@@ -32,12 +32,13 @@ export function PoolingComponent({ interval, roomId }: PollingComponentProps) {
 
           if (response.ok) {
             const game = (await response.json()) as Game;
-            if (game.gameStatus === 'FINISHED') {
+            if (game.gameStatus === "FINISHED") {
               clearInterval(intervalId);
+              await refreshCoins();
               if (game.userWinner === user.id) {
-                router.push(`/jogo/${roomId}/resultado/ganhador`)
+                router.push(`/jogo/${roomId}/resultado/ganhador`);
               } else {
-                router.push(`/jogo/${roomId}/resultado/perdedor`)
+                router.push(`/jogo/${roomId}/resultado/perdedor`);
               }
             }
           } else {

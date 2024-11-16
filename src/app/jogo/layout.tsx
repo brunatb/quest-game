@@ -21,20 +21,25 @@ export default function Layout({
 }>) {
   return (
     <div className={`w-full h-dvh`}>
+      {/* Overlay container */}
+      <div className="absolute inset-0 bg-black opacity-70 z-10"></div>
+
+      {/* Background image */}
       <div
-        className="flex w-full h-[calc(100% - 60px)] absolute bg-cover opacity-50"
-        // background image is on public/images/background.jpg
+        className="flex w-full h-[calc(100% - 60px)] absolute bg-cover z-0"
         style={{
           backgroundImage: `url(/images/bg-quest.webp)`,
           backgroundSize: "cover",
           backgroundPosition: "bottom",
           height: "100%",
-          opacity: 0.15,
+          opacity: 0.75,
         }}
       ></div>
+
+      {/* Main content */}
       <AuthProvider>
         <div
-          className="w-full flex items-center justify-center flex-col relative z-10 "
+          className="w-full flex items-center justify-center flex-col relative z-10 text-white"
           style={{
             height: "calc(100% - 64px)",
           }}
