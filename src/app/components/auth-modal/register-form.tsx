@@ -78,10 +78,10 @@ export function RegistrationForm({ onToggle }: Props) {
       className="font-poppins flex flex-col gap-1 bg-white rounded-lg p-6 text-blue-950 w-full"
       onSubmit={handleSubmit}
     >
-      <h1 className="font-extrabold text-2xl mt-4 w-full text-center">
+      <h1 className="font-extrabold text-xl mt-4 w-full text-center">
         Cadastre-se
       </h1>
-      <p className="text-lg text-center my-2">Faça o cadastro para jogar!</p>
+      <p className="text-base text-center my-2">Faça o cadastro para jogar!</p>
       <div className="w-full space-y-4">
         <div className="w-full">
           <Input

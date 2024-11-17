@@ -7,7 +7,7 @@ export function SquarePoint({ player }: Props) {
   return (
     <div className="text-sm lg:text-base">
       Pontos
-      <div className=" flex items-center justify-center shadow-md bg-white px-2 mt-1 rounded-xl lg:text-3xl text-xl text-black">
+      <div className=" flex items-center justify-center shadow-md bg-white px-2 mt-1 rounded-xl lg:text-xl text-lg text-black">
         {player === 1 ? points.playerOnePoints : points.playerTwoPoints}
       </div>
     </div>

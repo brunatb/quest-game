@@ -7,7 +7,7 @@ export function Bonus() {
   const { eliminateTwoAlternatives, isBonusUsed } = useGame();
   return (
     <div className="w-full font-poppins text-white">
-      <h4 className="text-xl mb-2">Bônus</h4>
+      <h4 className="text-lg mb-2">Bônus</h4>
       <div className="w-full">
         <button
           className={`bg-background-game py-2 px-3 rounded-xl  ${isBonusUsed ? "cursor-none opacity-65" : "cursor-pointer"}`}
@@ -20,7 +20,7 @@ export function Bonus() {
         >
           <div className="flex gap-1 items-center justify-start">
             <FaBomb
-              className={`text-2xl ${
+              className={`text-xl ${
                 !isBonusUsed ? "text-white" : "text-gray-400"
               }`}
             />
