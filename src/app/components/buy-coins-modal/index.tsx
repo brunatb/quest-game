@@ -71,7 +71,7 @@ export function BuyCoinsModal({ onClose }: Props) {
 
   return (
     <Modal>
-      <div className="w-full bg-white p-2 rounded-lg">
+      <div className="w-full bg-white p-4 rounded-lg">
         <div className="flex justify-end">
           <button className="text-blue-950 text-lg" onClick={onClose}>
             <IoMdClose className="text-3xl" />
