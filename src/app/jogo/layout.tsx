@@ -20,13 +20,13 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`w-full h-dvh`}>
+    <div className={`w-full min-h-dvh h-dvh`}>
       {/* Overlay container */}
-      <div className="absolute inset-0 bg-black opacity-70 z-10"></div>
+      <div className="inset-0 bg-black opacity-70 z-10 fixed"></div>
 
       {/* Background image */}
       <div
-        className="flex w-full h-[calc(100% - 60px)] absolute bg-cover z-0"
+        className="flex w-full min-h-[calc(100% - 60px)]  bg-cover z-0 fixed"
         style={{
           backgroundImage: `url(/images/bg-quest.webp)`,
           backgroundSize: "cover",
