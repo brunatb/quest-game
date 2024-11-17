@@ -19,7 +19,7 @@ export default async function Page({ params }: Props) {
           <div className="w-full md:flex justify-center hidden">
             <LogoQueston />
           </div>
-          <div className="w-full space-y-4 rounded-xl flex flex-col lg:w-[672px]">
+          <div className="w-full space-y-4 rounded-xl flex flex-col lg:w-[672px] mt-20 md:mt-0">
             <div className="px-2">
               <ScreenQuestion
                 roomId={params.roomId}
