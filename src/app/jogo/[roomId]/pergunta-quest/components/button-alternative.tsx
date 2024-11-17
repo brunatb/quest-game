@@ -46,7 +46,7 @@ export function ButtonAlternative({ game, answer, userId, bet }: Props) {
 
   return (
     <button
-      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg lg:text-xl text-base flex items-center justify-center gap-2 ${
+      className={`w-full border-2 shadow-sm shadow-gray-400 py-3 px-2 rounded-lg lg:text-lg text-base flex items-center justify-center gap-2 ${
         showResult
           ? `${
               answer.correct
@@ -62,9 +62,9 @@ export function ButtonAlternative({ game, answer, userId, bet }: Props) {
       {showResult && (
         <>
           {answer.correct ? (
-            <FaCheck className="text-green-800 text-lg" />
+            <FaCheck className="text-green-800 text-base" />
           ) : (
-            <IoMdClose className="text-red-700 text-lg" />
+            <IoMdClose className="text-red-700 text-base" />
           )}
         </>
       )}

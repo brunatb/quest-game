@@ -1,6 +1,7 @@
 import { nextui } from "@nextui-org/theme";
 import type { Config } from "tailwindcss";
 import animation from "tailwindcss-animated";
+import tailwindScrollbar from "tailwind-scrollbar";
 
 const config: Config = {
   darkMode: "class",
@@ -30,6 +31,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [nextui(), animation],
+  plugins: [nextui(), animation, tailwindScrollbar],
 };
 export default config;

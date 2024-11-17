@@ -7,7 +7,7 @@ export function LinkButton({ children, ...props }: Props) {
     <a
       className="bg-background-link rounded-[10px] flex items-center 
       text-center justify-center 
-      shadow-md border-1.5 w-full text-xl py-4 shadow-gray-950 border-none"
+      shadow-md border-1.5 w-full text-base py-4 shadow-gray-950 border-none"
       {...props}
     >
       {children}

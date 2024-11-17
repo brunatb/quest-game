@@ -58,10 +58,10 @@ export function ScreenQuestion({ roomId, questionId, game }: Props) {
 
   return (
     <div className="bg-white w-full space-y-6 p-4 rounded-lg">
-      <h2 className="text-center lg:text-2xl lg:mb-2 text-xl" style={{ color: corPergunta }}>
+      <h2 className="text-center lg:text-xl lg:mb-2 text-lg" style={{ color: corPergunta }}>
         {categoria}
       </h2>
-      <div className="text-justify lg:text-xl text-lg mt-0" style={{ color: corPergunta }}>
+      <div className="text-justify lg:text-lg text-base mt-0" style={{ color: corPergunta }}>
         <p>{question.text}</p>
         <div className="flex flex-col lg:gap-4 gap-2 items-center mt-2">
           {question.answers.map((answer, index) => (
