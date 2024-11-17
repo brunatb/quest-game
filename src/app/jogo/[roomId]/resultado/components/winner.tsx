@@ -5,9 +5,22 @@ import { PiCoinsFill } from "react-icons/pi";
 import { useAuth } from "@/app/components";
 import { DrumRoll } from "./drum-roll";
 import { LinkButton } from "@/app/components/link-button";
+import { Game } from "@/shared/protocols";
+import { useEffect, useState } from "react";
 
-export function Winner() {
+export function Winner({ game }: Props) {
   const { isLoading, user } = useAuth();
+  const [winnerCoins, setWinnerCoins] = useState(0);
+
+  useEffect(() => {
+    if (!user) return;
+
+    if (user.id === game.idPlayerOne) {
+      setWinnerCoins(game.pointPlayerOne || 0);
+    } else {
+      setWinnerCoins(game.pointPlayerTwo || 0);
+    }
+  }, [user]);
 
   if (isLoading) {
     return <DrumRoll />;
@@ -30,7 +43,7 @@ export function Winner() {
           <p>Sua recompensa</p>
           <div className="flex-col items-center justify-center flex">
             <PiCoinsFill size={46} className="text-yellow-500" />
-            <p className="text-lg">200</p>
+            <p className="text-lg">{winnerCoins}</p>
           </div>
         </div>
       </div>
@@ -40,3 +53,7 @@ export function Winner() {
     </div>
   );
 }
+
+type Props = {
+  game: Game;
+};
