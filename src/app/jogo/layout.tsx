@@ -39,9 +39,9 @@ export default function Layout({
       {/* Main content */}
       <AuthProvider>
         <div
-          className="w-full flex items-center justify-center flex-col relative z-10 text-white mt-5"
+          className="w-full flex items-center justify-center flex-col relative z-10 text-white"
           style={{
-            minHeight: "calc(100% - 84px)",
+            minHeight: "calc(100% - 64px)",
           }}
         >
           {children}

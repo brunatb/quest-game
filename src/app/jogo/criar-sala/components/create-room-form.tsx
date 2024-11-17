@@ -58,8 +58,8 @@ export function CreateRoomForm() {
         onSubmit={handleSubmit}
       >
         <GoBackButton href="/jogo">Voltar</GoBackButton>
-        <h1 className="font-extrabold text-2xl mt-4">Crie uma nova sala</h1>
-        <p className="text-md leading-5 my-2">
+        <h1 className="font-extrabold text-xl mt-4">Crie uma nova sala</h1>
+        <p className="text-base leading-5 my-2">
           Insira os dados para criar uma nova sala e compartilhe com outro
           jogador!
         </p>
