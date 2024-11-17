@@ -16,7 +16,7 @@ export default async function Page({ params }: Props) {
     <GameProvider game={game}>
       <BetProvider gameId={params.roomId}>
         <div className="font-[family-name:var(--font-geist-mono)] text-center font-bold flex flex-col items-center">
-          <div className="w-full md:flex justify-center  hidden">
+          <div className="w-full md:flex justify-center hidden">
             <LogoQueston />
           </div>
           <div className="w-full space-y-4 rounded-xl flex flex-col lg:w-[672px]">
